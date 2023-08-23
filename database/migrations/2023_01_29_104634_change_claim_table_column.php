@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Doctrine\DBAL\Types\FloatType;
+use Doctrine\DBAL\Types\Type;
+
+
+class ChangeClaimTableColumn extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        if (!Type::hasType('double')) {
+            Type::addType('double', FloatType::class);
+        }
+        Schema::table('gpp_claims', function (Blueprint $table) {
+            // $table->double('claimed_amount')->change();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
+}
